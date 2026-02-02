@@ -86,8 +86,8 @@ For full details, see our [Privacy Policy](https://compresr.ai/privacy).
 
 - [Get API Key](https://compresr.ai)
 - [Documentation](https://compresr.ai/docs/overview)
-- [GitHub](https://github.com/compresr/compresr-vscode)
-- [Report Issues](https://github.com/compresr/compresr-vscode/issues)
+- [GitHub](https://github.com/Compresr-ai/compresr-vscode)
+- [Report Issues](https://github.com/Compresr-ai/compresr-vscode/issues)
 
 ## 📄 License
 
