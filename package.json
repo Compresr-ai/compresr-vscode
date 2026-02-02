@@ -1,0 +1,175 @@
+{
+  "name": "compresr",
+  "displayName": "Compresr",
+  "description": "Compress markdown context files to reduce token usage with AI assistants",
+  "version": "0.1.0",
+  "publisher": "compresr",
+  "license": "MIT",
+  "icon": "images/compresr-icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/compresr/compresr-vscode"
+  },
+  "homepage": "https://compresr.ai",
+  "bugs": {
+    "url": "https://github.com/compresr/compresr-vscode/issues"
+  },
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other",
+    "Machine Learning"
+  ],
+  "keywords": [
+    "compression",
+    "tokens",
+    "ai",
+    "context",
+    "markdown",
+    "claude",
+    "copilot"
+  ],
+  "activationEvents": [
+    "onLanguage:markdown"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "compresr.compressFile",
+        "title": "Compresr: Compress Current File",
+        "icon": "$(fold)"
+      },
+      {
+        "command": "compresr.compressFilePreview",
+        "title": "Compresr: Compress with Preview",
+        "icon": "$(diff)"
+      },
+      {
+        "command": "compresr.compressWorkspace",
+        "title": "Compresr: Compress All Markdown Files",
+        "icon": "$(folder)"
+      },
+      {
+        "command": "compresr.restoreFile",
+        "title": "Compresr: Restore File from Backup",
+        "icon": "$(history)"
+      },
+      {
+        "command": "compresr.setApiKey",
+        "title": "Compresr: Set API Key",
+        "icon": "$(key)"
+      },
+      {
+        "command": "compresr.selectModel",
+        "title": "Compresr: Select Compression Model",
+        "icon": "$(list-selection)"
+      },
+      {
+        "command": "compresr.setCompressionRatio",
+        "title": "Compresr: Set Compression Ratio",
+        "icon": "$(settings)"
+      },
+      {
+        "command": "compresr.openQuickSettings",
+        "title": "Compresr",
+        "icon": {
+          "light": "images/compresr-icon.svg",
+          "dark": "images/compresr-icon.svg"
+        }
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "compresr.compressFile",
+        "key": "ctrl+shift+c",
+        "mac": "cmd+shift+c",
+        "when": "editorLangId == markdown"
+      },
+      {
+        "command": "compresr.openQuickSettings",
+        "key": "ctrl+shift+,",
+        "mac": "cmd+shift+,",
+        "when": "editorLangId == markdown"
+      }
+    ],
+    "configuration": {
+      "title": "Compresr",
+      "properties": {
+        "compresr.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Your Compresr API key (get one at https://compresr.ai)"
+        },
+        "compresr.compressionRatio": {
+          "type": "number",
+          "default": 0.3,
+          "minimum": 0.1,
+          "maximum": 0.9,
+          "description": "Target compression ratio (0.3 = compress to 30% of original)"
+        },
+        "compresr.modelName": {
+          "type": "string",
+          "default": "cmprsr_v1",
+          "description": "Compression model to use (run 'Compresr: Select Model' to see available models)"
+        },
+        "compresr.createBackups": {
+          "type": "boolean",
+          "default": true,
+          "description": "Create .bak backup files before compressing"
+        },
+        "compresr.apiEndpoint": {
+          "type": "string",
+          "default": "https://api.compresr.ai",
+          "description": "Compresr API endpoint"
+        }
+      }
+    },
+    "menus": {
+      "editor/title": [
+        {
+          "command": "compresr.openQuickSettings",
+          "when": "resourceLangId == markdown",
+          "group": "navigation"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "compresr.compressFile",
+          "when": "resourceExtname == .md",
+          "group": "compresr@1"
+        },
+        {
+          "command": "compresr.restoreFile",
+          "when": "resourceExtname == .bak",
+          "group": "compresr@2"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "compresr.compressFile",
+          "when": "resourceExtname == .md",
+          "group": "compresr@1"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.80.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "typescript": "^5.0.0",
+    "@vscode/vsce": "^2.22.0"
+  }
+}
